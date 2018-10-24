@@ -40,7 +40,7 @@ export default class App extends Component {
   }
 
   componentWillMount() {
-
+    console.log("Hi");
     Realm.open({
       schema: [UserInfo]
     }).then(realm => {
@@ -73,6 +73,12 @@ export default class App extends Component {
     });*/
   }
 
+  componentWillReceiveProps(nextProps) {
+    //const a = nextProps.refresh;
+    //console.log(nextProps.navigation.getParam('name'));
+    //const a = nextProps.navigation.getParam('name');
+  }
+
   
   /*
     // nochmal alles überdenken, wie funktioniert das mit Realm?
@@ -83,9 +89,15 @@ export default class App extends Component {
     
   */
 
+  handleOnNavigateBack = () => {
+    this.setState({
+      languageChosen: true
+    });
+  }
+
   renderStartConditional() {
     if (this.state.languageChosen === false) {
-      return <LanguageSelect />;
+      return <LanguageSelect rerender={this.handleOnNavigateBack} />;
     } else {
       return <HomeTabs />;
     }
@@ -109,7 +121,6 @@ export default class App extends Component {
         >
           {this.renderStartConditional()}
         </ImageBackground>
-        
       </View>
     );
   }

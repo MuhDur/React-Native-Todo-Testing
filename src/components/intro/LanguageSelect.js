@@ -29,7 +29,7 @@ class LanguageSelect extends Component {
     }
 
     handleConfirm = () => {
-        /*
+        
         Realm.open({
             schema: [UserInfo]
           }).then(realm => {
@@ -38,9 +38,10 @@ class LanguageSelect extends Component {
               const john = realm.create('userinfo', {language: this.state.language, languageChosen: 'true'});
             });
             this.setState({ realm });
-          });*/
+          });
 
-          this.props.navigation.navigate('Intro');
+          
+          this.props.navigation.navigate('Intro', { onNavigateBack: this.props.rerender });
 
           // zur AppIntro Seite schicken
     }

@@ -15,7 +15,14 @@ const styles = StyleSheet.create({
     image: {
       width: 320,
       height: 320,
+    },
+    textStyle: {
+      color: 'rgba(255, 255, 255, 1)'
+    },
+    titleStyle: {
+      color: 'rgba(255, 255, 255, 1)'
     }
+    
   });
   
   const slides = [
@@ -26,6 +33,8 @@ const styles = StyleSheet.create({
       //image: require('./assets/1.jpg'),
       imageStyle: styles.image,
       backgroundColor: '#59b2ab',
+      titleStyle: styles.titleStyle,
+      textStyle: styles.textStyle
     },
     {
       key: 'somethun-dos',
@@ -34,6 +43,8 @@ const styles = StyleSheet.create({
       //image: require('./assets/2.jpg'),
       imageStyle: styles.image,
       backgroundColor: '#febe29',
+      titleStyle: styles.titleStyle,
+      textStyle: styles.textStyle
     },
     {
       key: 'somethun1',
@@ -42,6 +53,8 @@ const styles = StyleSheet.create({
       //image: require('./assets/3.jpg'),
       imageStyle: styles.image,
       backgroundColor: '#22bcb5',
+      titleStyle: styles.titleStyle,
+      textStyle: styles.textStyle
     }
   ];
   
@@ -57,10 +70,18 @@ class AppIntro extends Component {
         showRealApp: false
       };
 
+      componentWillMount() {
+        // what language to display? well take a look at your db entry
+
+      }
+
       onDone = () => {
         // User finished the introduction. Show real app through
         // navigation or simply by controlling state
         this.setState({ showRealApp: true });
+        this.props.navigation.state.params.onNavigateBack();
+        // or navigate him to the real app
+        this.props.navigation.navigate('Home');
       }
 
       _renderNextButton = () => {
@@ -95,8 +116,7 @@ class AppIntro extends Component {
                 onDone={this.onDone}
                 renderDoneButton={this._renderDoneButton}
                 renderNextButton={this._renderNextButton}
-                titleStyle={{ color: 'black' }}
-                textStyle={{ color: 'black' }}
+                
             />
         );
       }
